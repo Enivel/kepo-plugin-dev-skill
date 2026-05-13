@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kepo Plugin Dev"
+  short_description: "Guide Kepo plugin development, testing, and release"
+  default_prompt: "Use $kepo-plugin-dev to develop, debug, test, or publish a Kepo plugin."
