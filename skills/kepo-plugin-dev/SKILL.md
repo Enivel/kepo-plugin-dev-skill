@@ -47,6 +47,7 @@ Start by classifying the request:
 - Runtime bug: identify the exact widget instance, run provider verification, inspect logs and stored data, then patch.
 - Local install request: build, then run `kp local-publish` or `kp local-publish --force` when a same-version install is expected.
 - Backend review request: validate version, release notes, build, preview assets, login, then run `kp publish` and report `status` and `reviewStatus`.
+- New or changed plugin documentation: create or update `README.md` automatically so the plugin can be presented clearly on GitHub.
 
 Ask the user only when:
 
@@ -117,6 +118,7 @@ Check:
 - `plugins/<name>/widget.config.ts`
 - `plugins/<name>/src/provider/`
 - `plugins/<name>/src/viewer/`
+- `plugins/<name>/README.md`
 - `plugins/<name>/VERSION.md`
 - `plugins/<name>/GUIDE.md`
 - `plugins/<name>/.kepo-workflow/STATE.md` when it exists
@@ -140,6 +142,7 @@ After scaffold or before edits, verify the baseline:
 - `package.json` has `pluginId`, `alias`, `version`, `description`, scripts, and `@kepoai/cli`
 - `widget.config.ts` defines real widgets, sizes, configs, events, and actions
 - `src/provider/` and `src/viewer/` match the widget contract
+- `README.md` exists and describes the plugin's real user-facing purpose, primary widgets, setup/configuration, and usage
 - `GUIDE.md` exists when build or publish needs it
 
 ### 3. Implement
@@ -170,6 +173,16 @@ Viewer work:
 
 Documentation work:
 
+- `README.md` is GitHub-facing. Create it for every new plugin and keep it updated whenever plugin purpose, widgets, configuration, usage, screenshots, or publish-ready positioning changes. It must describe the current plugin's real business value, not just generic scaffold instructions.
+- Every plugin `README.md` must include this fixed Kepo paragraph, preserving the official site link:
+
+```markdown
+## About Kepo
+
+[Kepo](https://kepo.ai) is an AI-native desktop panel for turning plugins into always-on widgets for news, feeds, prices, tasks, and custom workflows.
+```
+
+- Keep `README.md` understandable for GitHub visitors. Avoid provider, viewer, scraping, storage, socket, and internal debug terms unless the plugin is specifically developer-facing and the term is necessary.
 - `GUIDE.md` is user-facing; avoid provider, viewer, scraping, storage, and internal debug terms
 - `VERSION.md` is release-facing; put the current version entry at the top before publishing
 
@@ -236,6 +249,7 @@ After local install finishes, report the plugin ID, version, action, install pat
 Before running `kp publish`, verify:
 
 - `package.json` version is higher than the already published version when known
+- `README.md` exists, describes the current plugin accurately, and includes the fixed Kepo paragraph with `https://kepo.ai`
 - `VERSION.md` top entry matches the package version
 - `GUIDE.md` is user-facing and not empty
 - `pnpm typecheck` passes
